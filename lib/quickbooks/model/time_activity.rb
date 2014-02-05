@@ -20,6 +20,7 @@ module Quickbooks
       xml_accessor :vendor_ref, :from => 'VendorRef', :as => BaseReference
       xml_accessor :customer_ref, :from => 'CustomerRef', :as => BaseReference
       xml_accessor :item_ref, :from => 'ItemRef', :as => BaseReference
+      xml_accessor :class_ref, :from => 'ClassRef', :as => BaseReference
 
       xml_accessor :billable_status, :from => 'BillableStatus'
       xml_accessor :taxable, :from => 'Taxable'
@@ -27,6 +28,8 @@ module Quickbooks
       xml_accessor :hourly_rate, :from => 'HourlyRate'
       xml_accessor :minutes, :from => 'Minutes', :as => Integer
       xml_accessor :description, :from => 'Description'
+
+      reference_setters :employee_ref, :item_ref, :class_ref, :customer_ref
 
       #== Validations
       validates_inclusion_of :name_of, :in => NAMEOF_OPTIONS
@@ -48,6 +51,18 @@ module Quickbooks
       def valid_for_deletion?
         return false if(id.nil? || sync_token.nil?)
         id.to_i > 0 && !sync_token.to_s.empty? && sync_token.to_i >= 0
+      end
+
+      def billed?
+        billable_status == "HasBeenBilled"
+      end
+
+      def billable?
+        billable_status == "Billable"
+      end
+
+      def unbillable?
+        billable_status == "NotBillable"
       end
 
     end

@@ -5,6 +5,11 @@ module Quickbooks
       XML_NODE = "TaxCode"
       REST_RESOURCE = "taxcode"
 
+      # NB: TaxCodeRef Id can be one of the following:
+      #       TAX - A special code ID.
+      #       NON - A special code ID indicating non-taxable
+      #       CustomSalesTax - Indicating a custom sales tax on the line
+      #       Integer - An integer of the custom tax ID
       xml_accessor :id, :from => "Id"
       xml_accessor :sync_token, :from => "SyncToken", :as => Integer
       xml_accessor :meta_data, :from => "MetaData", :as => MetaData
