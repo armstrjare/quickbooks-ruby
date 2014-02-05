@@ -13,7 +13,7 @@ module Quickbooks
 
       xml_name XML_NODE
       xml_accessor :id, :from => 'Id', :as => Integer
-      xml_accessor :sync_token, :from => 'SyncToken', :as => Integer
+      xml_accessor :sync_token, :from => 'SyncToken'
       xml_accessor :meta_data, :from => 'MetaData', :as => MetaData
       xml_accessor :organization?, :from => 'Organization'
       xml_accessor :title, :from => 'Title'
@@ -27,7 +27,7 @@ module Quickbooks
       xml_accessor :primary_phone, :from => 'PrimaryPhone', :as => TelephoneNumber
       xml_accessor :mobile_phone, :from => 'Mobile', :as => TelephoneNumber
       xml_accessor :primary_email_address, :from => 'PrimaryEmailAddr', :as => EmailAddress
-      xml_accessor :number, :from => 'EmployeeNumber', :as => Integer
+      xml_accessor :number, :from => 'EmployeeNumber'
       xml_accessor :ssn, :from => 'SSN'
       xml_accessor :address, :from => 'PrimaryAddr', :as => PhysicalAddress
       xml_accessor :billable?, :from => 'BillableTime'
