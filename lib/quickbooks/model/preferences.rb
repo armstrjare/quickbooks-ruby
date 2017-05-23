@@ -29,6 +29,27 @@ module Quickbooks
         :report               => %w(ReportBasis)
       }
 
+      xml_reader :sales_forms, :from => "SalesFormsPrefs", :as => create_preference_class(*PREFERENCE_SECTIONS.delete(:sales_forms)) {
+        xml_reader :custom_fields, :as => [::Class.new(BaseModel) {
+          xml_name 'CustomField'
+          xml_accessor :name, :from => 'Name'
+          xml_accessor :type, :from => 'Type'
+          xml_accessor :string_value, :from => 'StringValue'
+          xml_accessor :boolean_value, :from => 'BooleanValue'
+          xml_accessor :date_value, :from => 'DateValue', :as => Date
+          xml_accessor :number_value, :from => 'NumberValue', :as => Integer
+
+          def value
+            case type
+            when 'BooleanType' then boolean_value == 'true'
+            when 'StringType' then string_value
+            when 'DateType' then date_value
+            when 'NumberType' then number_value
+            end
+          end
+        }], :from => 'CustomField', in: 'CustomField'
+      }
+
       PREFERENCE_SECTIONS.each do |section_name, fields|
         xml_reader section_name, :from => "#{section_name}_prefs".camelize, :as => create_preference_class(*fields)
       end

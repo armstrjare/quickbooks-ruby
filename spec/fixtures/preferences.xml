@@ -29,7 +29,14 @@
       <CustomField>
         <Name>SalesFormsPrefs.UseSalesCustom1</Name>
         <Type>BooleanType</Type>
-        <BooleanValue>false</BooleanValue>
+        <BooleanValue>true</BooleanValue>
+      </CustomField>
+    </CustomField>
+    <CustomField xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="StringTypeCustomFieldDefinition">
+      <CustomField>
+        <Name>SalesFormsPrefs.SalesCustomName1</Name>
+        <Type>StringType</Type>
+        <StringValue>Reference</StringValue>
       </CustomField>
     </CustomField>
     <CustomTxnNumbers>false</CustomTxnNumbers>
